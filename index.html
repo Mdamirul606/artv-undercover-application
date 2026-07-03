@@ -3,109 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR TV - Investigator Recruitment Portal</title>
+    <title>AR TV - Undercover Crime Reporter Online Application</title>
     <style>
-        :root { 
-            --primary-color: #2c3e50; 
-            --accent-color: #c0392b; 
-            --bg-color: #f5f6fa; 
-            --card-bg: #ffffff; 
-            --text-color: #2f3640; 
-            --border-color: #dcdde1; 
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #c0392b;
+            --bg-color: #f5f6fa;
+            --card-bg: #ffffff;
+            --text-color: #1a252f;
+            --border-color: #dcdde1;
         }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            margin: 0; 
-            padding: 20px; 
-            line-height: 1.6; 
+
+        body {
+            font-family: 'SolaimanLipi', 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
-        .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            border-top: 5px solid var(--accent-color); 
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--accent-color);
+            position: relative;
         }
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 2px solid var(--accent-color); 
-            padding-bottom: 15px; 
-            margin-bottom: 20px; 
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            gap: 15px;
         }
-        .logo-img { 
-            width: 130px; 
-            height: auto; 
+
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
         }
-        .badge { 
-            background-color: #fce4e4; 
-            border: 1px dashed var(--accent-color); 
-            color: var(--accent-color); 
-            padding: 6px 12px; 
-            font-size: 13px; 
-            font-weight: bold; 
-            border-radius: 4px; 
+
+        .logo-img {
+            width: 130px;
+            height: auto;
+            object-fit: contain;
         }
-        .form-group { 
-            display: flex; 
-            flex-direction: column; 
-            margin-bottom: 15px; 
+
+        .badge {
+            background-color: #fdf2f2;
+            border: 1px dashed var(--accent-color);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            white-space: nowrap;
         }
-        .label-wrapper { 
-            margin-bottom: 5px; 
-            font-size: 13px; 
-            font-weight: bold; 
-            color: var(--primary-color); 
+
+        .form-title {
+            text-align: center;
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 25px;
         }
-        input[type="text"], input[type="tel"], input[type="email"] { 
-            padding: 10px; 
-            border: 1px solid var(--border-color); 
-            border-radius: 4px; 
-            font-size: 14px; 
+
+        .form-title h2 {
+            font-size: 18px;
+            margin: 0;
+            color: var(--primary-color);
         }
-        input:focus {
+
+        .form-title p {
+            font-size: 14px;
+            margin: 5px 0 0 0;
+            color: #555;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label-wrapper {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .label-bn {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .label-en {
+            color: #666;
+            font-style: italic;
+            font-size: 11px;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], input[type="tel"], select, textarea, input[type="file"] {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            transition: border 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
             border-color: var(--accent-color);
             outline: none;
+            box-shadow: 0 0 5px rgba(192, 57, 43, 0.2);
         }
-        .btn-submit { 
-            display: block; 
-            width: 100%; 
-            background-color: var(--primary-color); 
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            font-size: 16px; 
-            font-weight: bold; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            margin-top: 25px; 
-            transition: 0.3s; 
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
-        .btn-submit:hover { 
-            background-color: #1a252f; 
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
         }
-        .status-message { 
-            display: none; 
-            padding: 15px; 
-            margin-top: 20px; 
-            border-radius: 4px; 
-            text-align: center; 
-            font-weight: bold; 
+
+        th {
+            background-color: #f2f4f4;
+            color: var(--primary-color);
         }
-        .success {
+
+        th div {
+            font-size: 10px;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            background: #fdfefe;
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-container input {
+            margin-right: 12px;
+            margin-top: 4px;
+            transform: scale(1.2);
+        }
+
+        .chk-text h4 {
+            margin: 0;
+            font-size: 13px;
+            color: var(--primary-color);
+        }
+
+        .chk-text h4 span {
+            font-size: 11px;
+            color: #666;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .chk-text p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: #57606f;
+        }
+
+        .alert-panel {
+            background-color: #fff5f5;
+            border: 1px solid #fab1a0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .alert-panel h4 {
+            margin: 0 0 8px 0;
+            color: var(--accent-color);
+            font-size: 14px;
+        }
+
+        .alert-panel ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 12px;
+        }
+
+        .alert-panel li {
+            margin-bottom: 5px;
+        }
+
+        .declaration {
+            font-size: 12px;
+            text-align: justify;
+            background: #f8f9fa;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 20px;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-submit:hover {
+            background-color: #a0281c;
+        }
+
+        .btn-submit:disabled {
+            background-color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            display: none;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .status-success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-        .error {
+        .status-error {
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+                text-align: center;
+            }
+            .logo-img {
+                width: 110px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
@@ -113,105 +312,287 @@
 
 <div class="container">
     <div class="header">
-        <img src="logo.png" alt="AR TV Logo" class="logo-img">
-        <div class="badge">প্রাথমিক আবেদন ফরম</div>
+        <div class="brand-wrapper">
+            <img src="logo.png" alt="AR TV Logo" class="logo-img">
+        </div>
+        <div class="badge">অত্যಂತ গোপনীয় / STRICTLY CONFIDENTIAL</div>
     </div>
 
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="margin: 0; color: var(--primary-color); font-size: 20px;">INVESTIGATOR APPLICATION FORM</h2>
-        <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">সঠিক তথ্য দিয়ে প্রাথমিক আবেদনটি সম্পন্ন করুন</p>
+    <div class="form-title">
+        <h2>APPLICATION FORM: UNDERCOVER CRIME REPORTER</h2>
+        <p>আবেদন ফরম: আন্ডারকাভার ক্রাইম রিপোর্টার (কৌশলগত ও অনুসন্ধান ইউনিট)</p>
     </div>
 
-    <form id="applicationForm">
-        <div class="form-group">
-            <label class="label-wrapper">আপনার পূর্ণ নাম (Full Name)</label>
-            <input type="text" id="fullName" required placeholder="যেমন: Md Amirul Islam">
-        </div>
-        <div class="form-group">
-            <label class="label-wrapper">মোবাইল নম্বর (Mobile Number)</label>
-            <input type="tel" id="mobileNumber" required placeholder="যেমন: 017XXXXXXXX">
-        </div>
-        <div class="form-group">
-            <label class="label-wrapper">ইমেইল এড্রেস (Email Address)</label>
-            <input type="email" id="emailAddress" required placeholder="যেমন: example@mail.com">
-        </div>
-        <div class="form-group">
-            <label class="label-wrapper">পছন্দসই অফিশিয়াল কোড নেম (Code Name)</label>
-            <input type="text" id="codeName" required placeholder="যেমন: Agent X">
+    <form id="crimeForm" action="https://formspree.io/f/mykqbayr" method="POST" enctype="multipart/form-data">
+        
+        <div class="section-title">1. PERSONAL & PRIMARY PROFILING / ১. ব্যক্তিগত ও প্রাথমিক প্রোফাইল</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">আবেদনকারীর পূর্ণ নাম</span> <span class="label-en">/ Full Name</span></label>
+                <input type="text" name="Full_Name" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">কোড নেম / ছদ্মনাম</span> <span class="label-en">/ Code Name (Alias)</span></label>
+                <input type="text" name="Code_Name" placeholder="Agent X">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">পিতার নাম</span> <span class="label-en">/ Father's Name</span></label>
+                <input type="text" name="Father_Name" required>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">মাতার নাম</span> <span class="label-en">/ Mother's Name</span></label>
+                <input type="text" name="Mother_Name" required>
+            </div>
+            <div class="form-group full-width">
+                <label class="label-wrapper"><span class="label-bn">বর্তমান ঠিকানা</span> <span class="label-en">/ Present Address</span></label>
+                <textarea name="Present_Address" rows="2" required></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label class="label-wrapper"><span class="label-bn">স্থায়ী ঠিকানা</span> <span class="label-en">/ Permanent Address</span></label>
+                <textarea name="Permanent_Address" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">এনআইডি / পাসপোর্ট নম্বর</span> <span class="label-en">/ NID or Passport Number</span></label>
+                <input type="text" name="NID_or_Passport" required>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">জন্ম তারিখ</span> <span class="label-en">/ Date of Birth</span></label>
+                <input type="date" name="Date_of_Birth" required>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">নিরাপদ মোবাইল নম্বর</span> <span class="label-en">/ Secure Mobile Number</span></label>
+                <input type="tel" name="Mobile_Number" required placeholder="017XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">নিরাপদ ইমেইল আইডি</span> <span class="label-en">/ Secure Email ID</span></label>
+                <input type="email" name="Email_ID" required placeholder="agent@example.com">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">আপনার ছবি আপলোড করুন</span> <span class="label-en">/ Upload Passport Photo</span></label>
+                <input type="file" name="Passport_Photo" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">ছদ্মবেশের ছবি (যদি থাকে)</span> <span class="label-en">/ Upload Disguise Photo</span></label>
+                <input type="file" name="Disguise_Photo" accept="image/*">
+            </div>
         </div>
 
-        <div id="msgBox" class="status-message"></div>
-        <button type="submit" id="submitBtn" class="btn-submit">SUBMIT APPLICATION / আবেদন জমা দিন</button>
+        <div class="section-title">2. PHYSICAL & DISGUISE PROFILING / ২. শারীরিক ও রূপ পরিবর্তন সংক্রান্ত বিবরণ</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">উচ্চতা</span> <span class="label-en">/ Height</span></label>
+                <input type="text" name="Height" placeholder="e.g. 5'7&quot;">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">ওজন</span> <span class="label-en">/ Weight</span></label>
+                <input type="text" name="Weight" placeholder="e.g. 70 kg">
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">রক্তের গ্রুপ</span> <span class="label-en">/ Blood Group</span></label>
+                <select name="Blood_Group">
+                    <option value="">নির্বাচন করুন / Select</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">দৃশ্যমান দাগ বা ট্যাটু</span> <span class="label-en">/ Visible Marks or Tattoos</span></label>
+                <input type="text" name="Visible_Marks" placeholder="যদি থাকে উল্লেখ করুন">
+            </div>
+            <div class="form-group full-width">
+                <label class="label-wrapper"><span class="label-bn">আঞ্চলিক ভাষা ও উপভাষা জ্ঞান</span> <span class="label-en">/ Known Dialects & Languages</span></label>
+                <input type="text" name="Languages_Dialects" placeholder="e.g. চট্টগ্রামী, সিলেটি, পুরান ঢাকা ইত্যাদি">
+            </div>
+            <div class="form-group full-width">
+                <label class="label-wrapper"><span class="label-bn">ছদ্মবেশ ধারণের সক্ষমতা ও পূর্ব অভিজ্ঞতা</span> <span class="label-en">/ Disguise Capabilities</span></label>
+                <textarea name="Disguise_Experience" rows="2"></textarea>
+            </div>
+        </div>
+
+        <div class="section-title">3. ACADEMIC QUALIFICATIONS / ৩. শিক্ষাগত যোগ্যতা</div>
+        <div class="form-group full-width">
+            <label class="label-wrapper" style="margin-bottom: 10px;">
+                <span class="label-bn" style="color: var(--accent-color);">* শিক্ষাগত যোগ্যতার সার্টিফিকেট এবং মার্কশিট জিপ (ZIP) বা পিডিএফ (PDF) ফরম্যাটে এখানে আপলোড করুন:</span>
+                <span class="label-en" style="display:block;">/ Upload all Academic Certificates & Transcripts in a single ZIP/PDF file:</span>
+            </label>
+            <input type="file" name="Academic_Documents_ZIP_PDF" accept=".pdf,.zip" required style="border: 1px dashed var(--accent-color); padding: 15px; background: #fffdfd;">
+        </div>
+
+        <p style="font-size: 11px; color: #555; margin-top: 15px;">অনুগ্রহ করে নিচে আপনার প্রাতিষ্ঠানিক ডিগ্রির বিবরণটি সংক্ষেপে পূরণ করুন:</p>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exam Name <div>পরীক্ষার নাম</div></th>
+                        <th>Major / Group <div>বিভাগ</div></th>
+                        <th>Board / University <div>বোর্ড / বিশ্ববিদ্যালয়</div></th>
+                        <th>Passing Year <div>পাসের সন</div></th>
+                        <th>GPA / CGPA <div>ফলাফল</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="Exam_1" style="width:90%"></td>
+                        <td><input type="text" name="Group_1" style="width:90%"></td>
+                        <td><input type="text" name="University_1" style="width:90%"></td>
+                        <td><input type="text" name="Year_1" style="width:90%"></td>
+                        <td><input type="text" name="GPA_1" style="width:90%"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="Exam_2" style="width:90%"></td>
+                        <td><input type="text" name="Group_2" style="width:90%"></td>
+                        <td><input type="text" name="University_2" style="width:90%"></td>
+                        <td><input type="text" name="Year_2" style="width:90%"></td>
+                        <td><input type="text" name="GPA_2" style="width:90%"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">4. ADVANCED TACTICAL & INTELLIGENCE SKILLS / ৪. বিশেষ কারিগরি ও গোয়েন্দা দক্ষতা</div>
+        
+        <label class="checkbox-container">
+            <input type="checkbox" name="Skill_Spy_Equipment" value="Yes">
+            <div class="chk-text">
+                <h4>স্পাই গ্যাজেট ও নজরদারি অপারেশন <span>/ Spy Equipment & Surveillance</span></h4>
+                <p>Expertise in operating hidden cameras, button recorders, and transmitters. / গোপন ক্যামেরা, বাটন রেকর্ডার ও ট্র্যাকিং ডিভাইস পরিচালনায় অভিজ্ঞতা।</p>
+            </div>
+        </label>
+
+        <label class="checkbox-container">
+            <input type="checkbox" name="Skill_Cyber_OSINT" value="Yes">
+            <div class="chk-text">
+                <h4>ওপেন সোর্স ইন্টেলিজেন্স ও সাইবার তদন্ত <span>/ OSINT & Cyber Investigation</span></h4>
+                <p>Tracking digital footprints and social media intelligence. / ডিজিটাল ফুটপ্রিন্ট ট্র্যাকিং এবং সোশ্যাল মিডিয়া ইনভেস্টিগেশন।</p>
+            </div>
+        </label>
+
+        <label class="checkbox-container">
+            <input type="checkbox" name="Skill_Infiltration" value="Yes">
+            <div class="chk-text">
+                <h4>ইনফিলট্রেশন ও ছদ্মবেশে তথ্য সংগ্রহ <span>/ Tactical Infiltration & Deep Undercover</span></h4>
+                <p>Ability to infiltrate crime syndicates without compromising identity. / আসল পরিচয় গোপন রেখে সিন্ডিকেট বা অপরাধস্থলে মিশে যাওয়ার কৌশল।</p>
+            </div>
+        </label>
+
+        <label class="checkbox-container">
+            <input type="checkbox" name="Skill_Self_Defense" value="Yes">
+            <div class="chk-text">
+                <h4>শারীরিক আত্মরক্ষা ও যুদ্ধ কৌশল প্রশিক্ষণ <span>/ Self-Defense & Combat Training</span></h4>
+                <p>Certified training in Martial Arts or combat readiness. / মার্শাল আর্টস বা বিশেষ শারীরিক সক্ষমতার প্রাতিষ্ঠানিক প্রশিক্ষণ।</p>
+            </div>
+        </label>
+
+        <label class="checkbox-container">
+            <input type="checkbox" name="Skill_Tactical_Driving" value="Yes">
+            <div class="chk-text">
+                <h4>ইভাকুয়েশন ও দ্রুত গাড়ি চালনা <span>/ Tactical Driving & Emergency Evacuation</span></h4>
+                <p>Valid driving license with emergency maneuverability skills. / জরুরি পরিস্থিতিতে দ্রুত নিরাপদে চলে আসার জন্য দক্ষ বাইক বা গাড়ি চালনার যোগ্যতা।</p>
+            </div>
+        </label>
+
+        <div class="section-title">5. EMERGENCY CONTACT / ৫. জরুরি যোগাযোগ</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">জরুরি যোগাযোগ ব্যক্তির নাম</span> <span class="label-en">/ Emergency Contact Name</span></label>
+                <input type="text" name="Emergency_Name" required>
+            </div>
+            <div class="form-group">
+                <label class="label-wrapper"><span class="label-bn">আবেদনকারীর সাথে সম্পর্ক</span> <span class="label-en">/ Relationship</span></label>
+                <input type="text" name="Emergency_Relationship" required>
+            </div>
+            <div class="form-group full-width">
+                <label class="label-wrapper"><span class="label-bn">জরুরি কন্টাক্ট ফোন নম্বর</span> <span class="label-en">/ Emergency Phone Number</span></label>
+                <input type="tel" name="Emergency_Phone" required>
+            </div>
+        </div>
+
+        <div class="alert-panel">
+            <h4>⚠️ MANDATORY INSTRUCTIONS / প্রয়োজনীয় নির্দেশনা:</h4>
+            <ul>
+                <li><strong>Documents:</strong> শিক্ষাগত যোগ্যতার সার্টিফিকেটের ফাইলটি অবশ্যই উপরে নির্ধারিত ফাইলে সঠিকভাবে সংযুক্ত হয়েছে কিনা তা নিশ্চিত করুন।</li>
+                <li><strong>Verification:</strong> আপনার প্রদত্ত সমস্ত তথ্য এবং পূর্ববর্তী কাজের অভিজ্ঞতা ব্যাকগ্রাউন্ড চেকের (Background check) মাধ্যমে কঠোরভাবে যাচাই করা হবে।</li>
+            </ul>
+        </div>
+
+        <div class="declaration">
+            <strong>DECLARATION / অঙ্গীকারনামা:</strong> I hereby declare that all information provided in this form is true and accurate. I fully understand that the role of an "Undercover Crime Reporter" involves high-risk tactical operations. I legally bind myself to maintain absolute organizational secrecy. / আমি এই মর্মে ঘোষণা করছি যে, এই আবেদনপত্রে প্রদত্ত সকল তথ্য সম্পূর্ণ সত্য ও নির্ভুল। আমি সম্পূর্ণ অবগত যে "আন্ডারকাভার ক্রাইম রিপোর্টার" পদটি অত্যন্ত ঝুঁকিপূর্ণ ও সংবেদনশীল। দায়িত্ব পালনকালে আমি প্রতিষ্ঠানের অভ্যন্তরীণ গোপনীয়তা বজায় রাখতে আইনত বাধ্য থাকব।
+        </div>
+
+        <div id="statusBox" class="status-message"></div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">SUBMIT APPLICATION / অনলাইন আবেদন জমা দিন</button>
     </form>
 </div>
 
-<!-- মডার্ন ফায়ারবেস মডুলার SDK স্ক্রিপ্ট -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    // আপনার ফায়ারবেস কনফিগারেশন কোড
-    const firebaseConfig = {
-        apiKey: "AIzaSyBLJQgF9Rmu9YqST0s2z-9sbqVeGRXrNcE",
-        authDomain: "artv-database.firebaseapp.com",
-        projectId: "artv-database",
-        storageBucket: "artv-database.firebasestorage.app",
-        messagingSenderId: "418861355205",
-        appId: "1:418861355205:web:8b77f01b6a7e34b798a0ac",
-        measurementId: "G-N10HDKNG87"
-    };
-
-    // ফায়ারবেস ইনিশিয়ালাইজ করা হলো
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const form = document.getElementById('applicationForm');
+<script>
+    const form = document.getElementById('crimeForm');
     const submitBtn = document.getElementById('submitBtn');
-    const msgBox = document.getElementById('msgBox');
+    const statusBox = document.getElementById('statusBox');
 
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // বাটন ডিজেবল করা
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'PROCESSING...';
-        msgBox.style.display = 'none';
-
-        // ইনপুট ভ্যালু নেওয়া
-        const fName = document.getElementById('fullName').value.trim();
-        const mNumber = document.getElementById('mobileNumber').value.trim();
-        const email = document.getElementById('emailAddress').value.trim();
-        const cName = document.getElementById('codeName').value.trim();
-
-        try {
-            // ফায়ারবেস ফায়ারস্টোরে ডেটা পাঠানো হচ্ছে
-            await addDoc(collection(db, "initial_applications"), {
-                fullName: fName,
-                mobileNumber: mNumber,
-                emailAddress: email,
-                codeName: cName,
-                status: "Pending", // 🎯 এখানে অটোমেটিক Pending সেট করা হলো
-                submittedAt: serverTimestamp() // আবেদনের সঠিক সময় ট্র্যাক করার জন্য
-            });
-
-            // সফল মেসেজ দেখানো
-            msgBox.innerText = '✅ আপনার আবেদনটি সফলভাবে জমা হয়েছে! অ্যাডমিন অ্যাপ্রুভ করার জন্য অপেক্ষা করুন।';
-            msgBox.className = 'status-message success';
-            msgBox.style.display = 'block';
-            form.reset(); // ফর্মের লেখাগুলো মুছে ফেলার জন্য
-
-        } catch (error) {
-            // ভুল হলে মেসেজ দেখানো
-            msgBox.innerText = '❌ দুঃখিত, ডাটাবেজে তথ্য সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।';
-            msgBox.className = 'status-message error';
-            msgBox.style.display = 'block';
-            console.error("Error creating document: ", error);
-        } finally {
-            // বাটন আবার সচল করা
-            submitBtn.disabled = false;
-            submitBtn.innerText = 'SUBMIT APPLICATION / আবেদন জমা দিন';
+    form.addEventListener('change', function(e) {
+        if (e.target.type === 'file') {
+            const file = e.target.files[0];
+            if (file && file.size > 10 * 1024 * 1024) { 
+                alert('⚠️ ফাইলটি অনেক বড়! অনুগ্রহ করে ১০ মেগাবাইটের (10MB) চেয়ে ছোট সাইজের ফাইল আপলোড করুন।');
+                e.target.value = ''; 
+            }
         }
     });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'PROCESSING... PLEASE WAIT / আবেদন জমা হচ্ছে...';
+        
+        statusBox.style.display = 'none';
+        
+        const formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                statusBox.className = 'status-message status-success';
+                statusBox.innerText = '✅ আপনার আবেদনটি সফলভাবে সিস্টেমে জমা হয়েছে! ধন্যবাদ।';
+                statusBox.style.display = 'block';
+                form.reset(); 
+                statusBox.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        statusBox.innerText = '❌ ' + data['errors'].map(error => error['message']).join(", ");
+                    } else {
+                        statusBox.innerText = '❌ দুঃখিত, আবেদনটি জমা দেওয়া যায়নি। দয়া করে আবার চেষ্টা করুন।';
+                    }
+                    statusBox.className = 'status-message status-error';
+                    statusBox.style.display = 'block';
+                });
+            }
+        })
+        .catch(error => {
+            statusBox.className = 'status-message status-error';
+            statusBox.innerText = '❌ নেটওয়ার্কের সমস্যা হচ্ছে। আপনার ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।';
+            statusBox.style.display = 'block';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'SUBMIT APPLICATION / অনলাইন আবেদন জমা দিন';
+        });
+    });
 </script>
+
 </body>
 </html>
