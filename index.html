@@ -15,12 +15,12 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'SolaimanLipi', 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .container {
@@ -36,10 +36,23 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center; /* লোগো ও টেক্সট এলাইনমেন্ট ঠিক করার জন্য */
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 15px;
             margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* লোগো ও লেখার মাঝখানের দূরত্ব */
+        }
+
+        .logo-img {
+            width: 80px; /* লোগোর সাইজ */
+            height: auto;
+            object-fit: contain;
         }
 
         .logo-area h1 {
@@ -47,12 +60,13 @@
             color: var(--accent-color);
             margin: 0;
             letter-spacing: 1px;
+            line-height: 1.2;
         }
 
         .logo-area p {
             font-size: 14px;
             color: var(--primary-color);
-            margin: 5px 0;
+            margin: 5px 0 0 0;
             font-weight: bold;
         }
 
@@ -60,10 +74,11 @@
             background-color: #fdf2f2;
             border: 1px dashed var(--accent-color);
             color: var(--accent-color);
-            padding: 5px 10px;
-            font-size: 12px;
+            padding: 6px 12px;
+            font-size: 13px;
             font-weight: bold;
             border-radius: 4px;
+            white-space: nowrap;
         }
 
         .form-title {
@@ -136,6 +151,7 @@
             border-radius: 4px;
             font-size: 13px;
             transition: border 0.3s;
+            font-family: inherit;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -236,6 +252,7 @@
             border: 1px solid var(--border-color);
             margin-top: 20px;
             border-radius: 4px;
+            line-height: 1.6;
         }
 
         .btn-submit {
@@ -251,6 +268,7 @@
             cursor: pointer;
             margin-top: 25px;
             transition: background 0.3s;
+            font-family: inherit;
         }
 
         .btn-submit:hover {
@@ -266,6 +284,12 @@
             }
             .header {
                 flex-direction: column;
+                gap: 15px;
+                align-items: center;
+                text-align: center;
+            }
+            .brand-wrapper {
+                flex-direction: column;
                 gap: 10px;
             }
             table {
@@ -279,9 +303,14 @@
 
 <div class="container">
     <div class="header">
-        <div class="logo-area">
-            <h1>AR TV</h1>
-            <p>এআর টিভি মিডিয়া লিমিটেড | AR TV MEDIA LIMITED</p>
+        <!-- লোগো এবং নাম একসাথে রাখার জন্য নতুন র‍্যাপার -->
+        <div class="brand-wrapper">
+            <!-- লোগো ইমেজ ট্যাগ (ফাইলটি সেম ফোল্ডারে logo.png নামে থাকতে হবে) -->
+            <img src="logo.png" alt="AR TV Logo" class="logo-img">
+            <div class="logo-area">
+                <h1>AR TV</h1>
+                <p>এআর টিভি মিডিয়া লিমিটেড | AR TV MEDIA LIMITED</p>
+            </div>
         </div>
         <div class="badge">অত্যন্ত গোপনীয় / STRICTLY CONFIDENTIAL</div>
     </div>
@@ -291,7 +320,6 @@
         <p>আবেদন ফরম: আন্ডারকাভার ক্রাইম রিপোর্টার (কৌশলগত ও অনুসন্ধান ইউনিট)</p>
     </div>
 
-    <!-- আপনার নির্দিষ্ট Formspree অ্যাকশন লিংকটি এখানে বসানো হয়েছে -->
     <form action="https://formspree.io/f/mykqbayr" method="POST" enctype="multipart/form-data">
         
         <!-- SECTION 1 -->
