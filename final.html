@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR TV - Official Selection & Joining Portal</title>
     <style>
-        :root { --primary-color: #2c3e50; --accent-color: #27ae60; /* চূড়ান্ত পোর্টালে সবুজের ছোঁয়া */ --bg-color: #f4f9f4; --card-bg: #ffffff; --text-color: #1a252f; --border-color: #dcdde1; }
+        :root { --primary-color: #2c3e50; --accent-color: #27ae60; --bg-color: #f4f9f4; --card-bg: #ffffff; --text-color: #1a252f; --border-color: #dcdde1; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; line-height: 1.6; }
         .container { max-width: 850px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--accent-color); }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; }
@@ -18,7 +18,9 @@
         .label-wrapper { margin-bottom: 5px; font-size: 13px; font-weight: bold; color: var(--primary-color); }
         input[type="text"], input[type="file"] { padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; }
         .btn-submit { display: block; width: 100%; background-color: var(--accent-color); color: white; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 25px; }
-        .status-message { display: none; padding: 15px; margin-top: 20px; border-radius: 4px; text-align: center; font-weight: bold; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status-message { display: none; padding: 15px; margin-top: 20px; border-radius: 4px; text-align: center; font-weight: bold; }
+        .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -34,23 +36,21 @@
         <p>AR TV ‘কৌশলগত ও অনুসন্ধান ইউনিট’-এ আন্ডারকাভার ক্রাইম রিপোর্টার পদে আপনাকে স্বাগতম।</p>
     </div>
 
-    <!-- এখানে আপনার Formspree বা মেইন অ্যাকশন লিংক দিন -->
-    <form id="finalForm" action="https://formspree.io/f/mykqbayr" method="POST" enctype="multipart/form-data">
-        
+    <form id="finalForm">
         <div class="section-title">১. চূড়ান্ত নিয়োগ নিশ্চিতকরণ (Official Activation)</div>
         <div class="form-group">
-            <label class="label-wrapper">আপনার অফিসিয়াল কোড নেম নিশ্চিত করুন (নিরাপত্তার স্বার্থে)</label>
-            <input type="text" name="Final_Code_Name" required placeholder="e.g. Agent Phoenix">
+            <label class="label-wrapper">আপনার অফিসিয়াল কোড নেম নিশ্চিত করুন</label>
+            <input type="text" id="finalCodeName" required placeholder="e.g. Agent Phoenix">
         </div>
 
         <div class="section-title">২. গুরুত্বপূর্ণ ফাইল আপলোড (Mandatory Documents)</div>
         <div class="form-group">
             <label class="label-wrapper">এনআইডি/পাসপোর্ট স্ক্যান কপি আপলোড করুন (PDF/Image)</label>
-            <input type="file" name="NID_Scan" accept="image/*,.pdf" required>
+            <input type="file" id="nidScan" accept="image/*,.pdf" required>
         </div>
         <div class="form-group">
             <label class="label-wrapper">শিক্ষাগত যোগ্যতার সার্টিফিকেট ফাইল (ZIP/PDF)</label>
-            <input type="file" name="Academic_Files" accept=".pdf,.zip" required>
+            <input type="file" id="academicFiles" accept=".pdf,.zip" required>
         </div>
 
         <div style="font-size: 12px; background: #f8f9fa; padding: 12px; border: 1px solid #dcdde1; margin-top: 15px;">
@@ -62,28 +62,74 @@
     </form>
 </div>
 
-<script>
+<!-- মডার্ন ফায়ারবেস স্ক্রিপ্ট (ফাইল স্টোরেজ সহ) -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+    // আপনার দেওয়া আসল ফায়ারবেস কনফিগারেশন
+    const firebaseConfig = {
+        apiKey: "AIzaSyBLJQgF9Rmu9YqST0s2z-9sbqVeGRXrNcE",
+        authDomain: "artv-database.firebaseapp.com",
+        projectId: "artv-database",
+        storageBucket: "artv-database.firebasestorage.app",
+        messagingSenderId: "418861355205",
+        appId: "1:418861355205:web:8b77f01b6a7e34b798a0ac",
+        measurementId: "G-N10HDKNG87"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
     const form = document.getElementById('finalForm');
     const submitBtn = document.getElementById('submitBtn');
     const statusBox = document.getElementById('statusBox');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         submitBtn.disabled = true;
-        submitBtn.innerText = 'PROCESSING CONTRACT...';
-        
-        const formData = new FormData(form);
-        fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
-        .then(response => {
-            if (response.ok) {
-                statusBox.innerText = '✅ আপনার অফিশিয়াল যোগদান ও চুক্তি সফলভাবে সম্পন্ন হয়েছে! শীঘ্রই ব্রিফিং টিম যোগাযোগ করবে।';
-                statusBox.style.display = 'block';
-                form.reset();
-            }
-        }).finally(() => {
+        submitBtn.innerText = 'UPLOADING...';
+        statusBox.style.display = 'none';
+
+        const finalCodeName = document.getElementById('finalCodeName').value;
+        const nidFile = document.getElementById('nidScan').files[0];
+        const academicFile = document.getElementById('academicFiles').files[0];
+
+        try {
+            // ১. ফায়ারবেস স্টোরেজে এনআইডি আপলোড
+            const nidStorageRef = ref(storage, `nid_scans/${Date.now()}_${nidFile.name}`);
+            const nidSnapshot = await uploadBytes(nidStorageRef, nidFile);
+            const nidUrl = await getDownloadURL(nidSnapshot.ref);
+
+            // ২. ফায়ারবেস স্টোরেজে সার্টিফিকেট আপলোড
+            const academicStorageRef = ref(storage, `academic_docs/${Date.now()}_${academicFile.name}`);
+            const academicSnapshot = await uploadBytes(academicStorageRef, academicFile);
+            const academicUrl = await getDownloadURL(academicSnapshot.ref);
+
+            // ৩. ফায়ারস্টোর ডাটাবেজে ডাটা সেভ করা
+            await addDoc(collection(db, "final_joinings"), {
+                finalCodeName: finalCodeName,
+                nidScanUrl: nidUrl,
+                academicDocsUrl: academicUrl,
+                joinedAt: serverTimestamp()
+            });
+
+            statusBox.className = 'status-message status-success';
+            statusBox.innerText = '✅ আপনার অফিশিয়াল যোগদান ও চুক্তি সফলভাবে ফায়ারবেসে সম্পন্ন হয়েছে!';
+            statusBox.style.display = 'block';
+            form.reset();
+
+        } catch (error) {
+            statusBox.className = 'status-message status-error';
+            statusBox.innerText = '❌ কোনো একটি টেকনিক্যাল ভুলের কারণে সাবমিট হয়নি। আবার চেষ্টা করুন।';
+            statusBox.style.display = 'block';
+            console.error(error);
+        } finally {
             submitBtn.disabled = false;
             submitBtn.innerText = 'CONFIRM JOINING / চূড়ান্ত যোগদান সম্পন্ন করুন';
-        });
+        }
     });
 </script>
 </body>
