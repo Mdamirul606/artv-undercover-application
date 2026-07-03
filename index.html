@@ -3,30 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR TV - Undercover Crime Reporter Initial Application</title>
+    <title>AR TV - Investigator Recruitment Portal</title>
     <style>
-        :root { --primary-color: #2c3e50; --accent-color: #c0392b; --bg-color: #f5f6fa; --card-bg: #ffffff; --text-color: #1a252f; --border-color: #dcdde1; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 850px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--accent-color); }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; gap: 15px; }
-        .logo-img { width: 130px; height: auto; object-fit: contain; }
-        .badge { background-color: #fdf2f2; border: 1px dashed var(--accent-color); color: var(--accent-color); padding: 6px 12px; font-size: 13px; font-weight: bold; border-radius: 4px; white-space: nowrap; }
-        .form-title { text-align: center; background: #f8f9fa; border: 1px solid var(--border-color); padding: 12px; border-radius: 5px; margin-bottom: 25px; }
-        .form-title h2 { font-size: 18px; margin: 0; color: var(--primary-color); }
-        .form-title p { font-size: 14px; margin: 5px 0 0 0; color: #555; }
-        .section-title { background-color: var(--primary-color); color: white; padding: 8px 12px; font-size: 14px; font-weight: bold; margin-top: 25px; margin-bottom: 15px; border-left: 5px solid var(--accent-color); border-radius: 0 4px 4px 0; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .full-width { grid-column: span 2; }
-        .form-group { display: flex; flex-direction: column; }
-        .label-wrapper { margin-bottom: 5px; font-size: 13px; font-weight: bold; color: var(--primary-color); }
-        input[type="text"], input[type="email"], input[type="date"], input[type="tel"], select, textarea, input[type="file"] { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 13px; font-family: inherit; }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-color); outline: none; }
-        .checkbox-container { display: flex; align-items: flex-start; background: #fdfefe; border: 1px solid var(--border-color); padding: 12px; border-radius: 5px; margin-bottom: 10px; }
-        .checkbox-container input { margin-right: 12px; margin-top: 4px; transform: scale(1.2); }
-        .btn-submit { display: block; width: 100%; background-color: var(--accent-color); color: white; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 25px; }
-        .status-message { display: none; padding: 15px; margin-top: 20px; border-radius: 4px; text-align: center; font-weight: bold; }
-        .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        :root { 
+            --primary-color: #2c3e50; 
+            --accent-color: #c0392b; 
+            --bg-color: #f5f6fa; 
+            --card-bg: #ffffff; 
+            --text-color: #2f3640; 
+            --border-color: #dcdde1; 
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 20px; 
+            line-height: 1.6; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            border-top: 5px solid var(--accent-color); 
+        }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--accent-color); 
+            padding-bottom: 15px; 
+            margin-bottom: 20px; 
+        }
+        .logo-img { 
+            width: 130px; 
+            height: auto; 
+        }
+        .badge { 
+            background-color: #fce4e4; 
+            border: 1px dashed var(--accent-color); 
+            color: var(--accent-color); 
+            padding: 6px 12px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            border-radius: 4px; 
+        }
+        .form-group { 
+            display: flex; 
+            flex-direction: column; 
+            margin-bottom: 15px; 
+        }
+        .label-wrapper { 
+            margin-bottom: 5px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+        }
+        input[type="text"], input[type="tel"], input[type="email"] { 
+            padding: 10px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 4px; 
+            font-size: 14px; 
+        }
+        input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+        .btn-submit { 
+            display: block; 
+            width: 100%; 
+            background-color: var(--primary-color); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            margin-top: 25px; 
+            transition: 0.3s; 
+        }
+        .btn-submit:hover { 
+            background-color: #1a252f; 
+        }
+        .status-message { 
+            display: none; 
+            padding: 15px; 
+            margin-top: 20px; 
+            border-radius: 4px; 
+            text-align: center; 
+            font-weight: bold; 
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
@@ -34,60 +114,43 @@
 <div class="container">
     <div class="header">
         <img src="logo.png" alt="AR TV Logo" class="logo-img">
-        <div class="badge">প্রাথমিক আবেদন / INITIAL SELECTION</div>
+        <div class="badge">প্রাথমিক আবেদন ফরম</div>
     </div>
 
-    <div class="form-title">
-        <h2>APPLICATION FORM: UNDERCOVER CRIME REPORTER</h2>
-        <p>আবেদন ফরম: আন্ডারকাভার ক্রাইম রিপোর্টার (প্রাথমিক ডেটা ফরম)</p>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="margin: 0; color: var(--primary-color); font-size: 20px;">INVESTIGATOR APPLICATION FORM</h2>
+        <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">সঠিক তথ্য দিয়ে প্রাথমিক আবেদনটি সম্পন্ন করুন</p>
     </div>
 
-    <form id="initialForm">
-        <div class="section-title">১. ব্যক্তিগত প্রোফাইল (Personal Profile)</div>
-        <div class="form-grid">
-            <div class="form-group">
-                <label class="label-wrapper">আবেদনকারীর পূর্ণ নাম / Full Name</label>
-                <input type="text" id="fullName" required placeholder="যেমন: ওমক আহমেদ">
-            </div>
-            <div class="form-group">
-                <label class="label-wrapper">কোড নেম / Code Name (Alias)</label>
-                <input type="text" id="codeName" placeholder="Agent X">
-            </div>
-            <div class="form-group">
-                <label class="label-wrapper">নিরাপদ মোবাইল নম্বর / Mobile</label>
-                <input type="tel" id="mobileNumber" required placeholder="017XXXXXXXX">
-            </div>
-            <div class="form-group">
-                <label class="label-wrapper">নিরাপদ ইমেইল আইডি / Email</label>
-                <input type="email" id="emailID" required placeholder="example@email.com">
-            </div>
-            <div class="form-group full-width">
-                <label class="label-wrapper">বর্তমান ঠিকানা / Address</label>
-                <textarea id="presentAddress" rows="2" required></textarea>
-            </div>
+    <form id="applicationForm">
+        <div class="form-group">
+            <label class="label-wrapper">আপনার পূর্ণ নাম (Full Name)</label>
+            <input type="text" id="fullName" required placeholder="যেমন: Md Amirul Islam">
+        </div>
+        <div class="form-group">
+            <label class="label-wrapper">মোবাইল নম্বর (Mobile Number)</label>
+            <input type="tel" id="mobileNumber" required placeholder="যেমন: 017XXXXXXXX">
+        </div>
+        <div class="form-group">
+            <label class="label-wrapper">ইমেইল এড্রেস (Email Address)</label>
+            <input type="email" id="emailAddress" required placeholder="যেমন: example@mail.com">
+        </div>
+        <div class="form-group">
+            <label class="label-wrapper">পছন্দসই অফিশিয়াল কোড নেম (Code Name)</label>
+            <input type="text" id="codeName" required placeholder="যেমন: Agent X">
         </div>
 
-        <div class="section-title">২. বিশেষ গোয়েন্দা দক্ষতা (Intelligence Skills)</div>
-        <label class="checkbox-container">
-            <input type="checkbox" id="skillSpy" value="Yes">
-            <div><strong>গোপন ক্যামেরা ও নজরদারি ডিভাইস পরিচালনা</strong><p>Expertise in spy equipment & surveillance.</p></div>
-        </label>
-        <label class="checkbox-container">
-            <input type="checkbox" id="skillCyber" value="Yes">
-            <div><strong>ওপেন সোর্স ইন্টেলिजেন্স ও সাইবার তদন্ত</strong><p>OSINT & Cyber Investigation.</p></div>
-        </label>
-
-        <div id="statusBox" class="status-message"></div>
+        <div id="msgBox" class="status-message"></div>
         <button type="submit" id="submitBtn" class="btn-submit">SUBMIT APPLICATION / আবেদন জমা দিন</button>
     </form>
 </div>
 
-<!-- আপনার দেওয়া কনফিগারেশন অনুযায়ী মডার্ন ফায়ারবেস স্ক্রিপ্ট -->
+<!-- মডার্ন ফায়ারবেস মডুলার SDK স্ক্রিপ্ট -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // আপনার দেওয়া আসল ফায়ারবেস কনফিগারেশন
+    // আপনার ফায়ারবেস কনফিগারেশন কোড
     const firebaseConfig = {
         apiKey: "AIzaSyBLJQgF9Rmu9YqST0s2z-9sbqVeGRXrNcE",
         authDomain: "artv-database.firebaseapp.com",
@@ -97,45 +160,54 @@
         appId: "1:418861355205:web:8b77f01b6a7e34b798a0ac",
         measurementId: "G-N10HDKNG87"
     };
-    
-    // ফায়ারবেস চালু করা হলো
+
+    // ফায়ারবেস ইনিশিয়ালাইজ করা হলো
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const form = document.getElementById('initialForm');
+    const form = document.getElementById('applicationForm');
     const submitBtn = document.getElementById('submitBtn');
-    const statusBox = document.getElementById('statusBox');
+    const msgBox = document.getElementById('msgBox');
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // বাটন ডিজেবল করা
         submitBtn.disabled = true;
         submitBtn.innerText = 'PROCESSING...';
-        statusBox.style.display = 'none';
+        msgBox.style.display = 'none';
 
-        const initialData = {
-            fullName: document.getElementById('fullName').value,
-            codeName: document.getElementById('codeName').value,
-            mobileNumber: document.getElementById('mobileNumber').value,
-            emailID: document.getElementById('emailID').value,
-            presentAddress: document.getElementById('presentAddress').value,
-            skillSpy: document.getElementById('skillSpy').checked ? "Yes" : "No",
-            skillCyber: document.getElementById('skillCyber').checked ? "Yes" : "No",
-            submittedAt: serverTimestamp()
-        };
+        // ইনপুট ভ্যালু নেওয়া
+        const fName = document.getElementById('fullName').value.trim();
+        const mNumber = document.getElementById('mobileNumber').value.trim();
+        const email = document.getElementById('emailAddress').value.trim();
+        const cName = document.getElementById('codeName').value.trim();
 
         try {
-            // ফায়ারবেস ফায়ারস্টোরে 'initial_applications' কালেকশনে ডাটা সেভ হচ্ছে
-            await addDoc(collection(db, "initial_applications"), initialData);
-            statusBox.className = 'status-message status-success';
-            statusBox.innerText = '✅ আপনার প্রাথমিক ডেটা সফলভাবে ফায়ারবেস ডাটাবেজে জমা হয়েছে!';
-            statusBox.style.display = 'block';
-            form.reset();
+            // ফায়ারবেস ফায়ারস্টোরে ডেটা পাঠানো হচ্ছে
+            await addDoc(collection(db, "initial_applications"), {
+                fullName: fName,
+                mobileNumber: mNumber,
+                emailAddress: email,
+                codeName: cName,
+                status: "Pending", // 🎯 এখানে অটোমেটিক Pending সেট করা হলো
+                submittedAt: serverTimestamp() // আবেদনের সঠিক সময় ট্র্যাক করার জন্য
+            });
+
+            // সফল মেসেজ দেখানো
+            msgBox.innerText = '✅ আপনার আবেদনটি সফলভাবে জমা হয়েছে! অ্যাডমিন অ্যাপ্রুভ করার জন্য অপেক্ষা করুন।';
+            msgBox.className = 'status-message success';
+            msgBox.style.display = 'block';
+            form.reset(); // ফর্মের লেখাগুলো মুছে ফেলার জন্য
+
         } catch (error) {
-            statusBox.className = 'status-message status-error';
-            statusBox.innerText = '❌ দুঃখিত, ফায়ারবেসে ডেটা পাঠানো যায়নি। আবার চেষ্টা করুন।';
-            statusBox.style.display = 'block';
-            console.error(error);
+            // ভুল হলে মেসেজ দেখানো
+            msgBox.innerText = '❌ দুঃখিত, ডাটাবেজে তথ্য সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।';
+            msgBox.className = 'status-message error';
+            msgBox.style.display = 'block';
+            console.error("Error creating document: ", error);
         } finally {
+            // বাটন আবার সচল করা
             submitBtn.disabled = false;
             submitBtn.innerText = 'SUBMIT APPLICATION / আবেদন জমা দিন';
         }
