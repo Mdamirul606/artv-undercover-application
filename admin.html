@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR TV - Admin Control Panel</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f9; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 3px solid #c0392b; padding-bottom: 10px; color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; font-size: 14px; }
+        th { background-color: #2c3e50; color: white; }
+        .btn-approve { background-color: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-approve:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .status-pending { background-color: #f1c40f; color: #fff; }
+        .status-approved { background-color: #27ae60; color: #fff; }
+        .nid-input { padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; width: 120px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>AR TV - আন্ডারকাভার রিপোর্টার অ্যাডমিন প্যানেল</h2>
+    <p>এখান থেকে প্রার্থীদের আবেদন দেখে সরাসরি এক ক্লিকে Approve করতে পারবেন।</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>নাম (Name)</th>
+                <th>কোড নেম</th>
+                <th>মোবাইল</th>
+                <th>এনআইডি (এখানে লিখুন)</th>
+                <th>স্ট্যাটাস</th>
+                <th>অ্যাকশন</th>
+            </tr>
+        </thead>
+        <tbody id="applicantTableBody">
+            <!-- ফায়ারবেস থেকে ডাটা এসে এখানে অটো লোড হবে -->
+        </tbody>
+    </table>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBLJQgF9Rmu9YqST0s2z-9sbqVeGRXrNcE",
+        authDomain: "artv-database.firebaseapp.com",
+        projectId: "artv-database",
+        storageBucket: "artv-database.firebasestorage.app",
+        messagingSenderId: "418861355205",
+        appId: "1:418861355205:web:8b77f01b6a7e34b798a0ac"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadApplicants() {
+        const querySnapshot = await getDocs(collection(db, "initial_applications"));
+        const tbody = document.getElementById('applicantTableBody');
+        tbody.innerHTML = '';
+
+        querySnapshot.forEach((documentSnapshot) => {
+            const data = documentSnapshot.data();
+            const docId = documentSnapshot.id;
+            
+            const currentStatus = data.status || 'Pending';
+            const currentNID = data.nidNumber || '';
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><b>${data.fullName}</b></td>
+                <td>${data.codeName || 'N/A'}</td>
+                <td>${data.mobileNumber}</td>
+                <td>
+                    <input type="text" class="nid-input" id="nid_${docId}" value="${currentNID}" placeholder="NID No." ${currentStatus === 'Approved' ? 'disabled' : ''}>
+                </td>
+                <td>
+                    <span class="status-badge ${currentStatus === 'Approved' ? 'status-approved' : 'status-pending'}">${currentStatus}</span>
+                </td>
+                <td>
+                    <button class="btn-approve" id="btn_${docId}" ${currentStatus === 'Approved' ? 'disabled' : ''}>APPROVE</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+
+            // বাটনে ক্লিক করলে অটোমেটিক ফায়ারবেসে Approve হয়ে যাবে
+            document.getElementById(`btn_${docId}`).addEventListener('click', async () => {
+                const nidValue = document.getElementById(`nid_${docId}`).value.trim();
+                if(!nidValue) {
+                    alert('দয়া করে আগে প্রার্থীর NID নম্বরটি ইনপুট বক্সে লিখুন!');
+                    return;
+                }
+                
+                document.getElementById(`btn_${docId}`).innerText = 'Saving...';
+                
+                // ফায়ারবেসের ডেটা এক ক্লিকে আপডেট
+                const docRef = doc(db, "initial_applications", docId);
+                await updateDoc(docRef, {
+                    status: "Approved",
+                    nidNumber: nidValue
+                });
+                
+                alert(`${data.fullName}-কে সফলভাবে Approve করা হয়েছে!`);
+                loadApplicants(); // টেবিল রিফ্রেশ
+            });
+        });
+    }
+
+    // পেজ লোড হলেই রান হবে
+    loadApplicants();
+</script>
+</body>
+</html>
