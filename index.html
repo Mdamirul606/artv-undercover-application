@@ -36,7 +36,7 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* লোগো ও টেক্সট এলাইনমেন্ট ঠিক করার জন্য */
+            align-items: center; /* লোগো এবং ব্যাজকে সোজাসুজি রাখার জন্য */
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 15px;
             margin-bottom: 20px;
@@ -46,28 +46,12 @@
         .brand-wrapper {
             display: flex;
             align-items: center;
-            gap: 15px; /* লোগো ও লেখার মাঝখানের দূরত্ব */
         }
 
         .logo-img {
-            width: 80px; /* লোগোর সাইজ */
+            width: 130px; /* লেখা রিমুভ করায় লোগোর সাইজ কিছুটা বড় করে অ্যাডজাস্ট করা হয়েছে */
             height: auto;
             object-fit: contain;
-        }
-
-        .logo-area h1 {
-            font-size: 28px;
-            color: var(--accent-color);
-            margin: 0;
-            letter-spacing: 1px;
-            line-height: 1.2;
-        }
-
-        .logo-area p {
-            font-size: 14px;
-            color: var(--primary-color);
-            margin: 5px 0 0 0;
-            font-weight: bold;
         }
 
         .badge {
@@ -288,9 +272,8 @@
                 align-items: center;
                 text-align: center;
             }
-            .brand-wrapper {
-                flex-direction: column;
-                gap: 10px;
+            .logo-img {
+                width: 110px; /* মোবাইল রেসপন্সিভের জন্য লোগো কিছুটা ছোট করা হয়েছে */
             }
             table {
                 display: block;
@@ -303,14 +286,9 @@
 
 <div class="container">
     <div class="header">
-        <!-- লোগো এবং নাম একসাথে রাখার জন্য নতুন র‍্যাপার -->
+        <!-- এখানে টেক্সট রিমুভ করে শুধু লোগো ইমেজটি রাখা হয়েছে -->
         <div class="brand-wrapper">
-            <!-- লোগো ইমেজ ট্যাগ (ফাইলটি সেম ফোল্ডারে logo.png নামে থাকতে হবে) -->
             <img src="logo.png" alt="AR TV Logo" class="logo-img">
-            <div class="logo-area">
-                <h1>AR TV</h1>
-                <p>এআর টিভি মিডিয়া লিমিটেড | AR TV MEDIA LIMITED</p>
-            </div>
         </div>
         <div class="badge">অত্যন্ত গোপনীয় / STRICTLY CONFIDENTIAL</div>
     </div>
