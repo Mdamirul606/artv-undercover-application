@@ -2,297 +2,36 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR TV - Strategic Portal</title>
+    <title>AR TV - Reporter Portal</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #c0392b;
-            --user-color: #27ae60;
-            --admin-bg: #0f172a;
-            --bg-color: #f5f6fa;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0; padding: 0; min-height: 100vh;
-        }
-
-        /* লগইন স্ক্রিন */
-        #loginScreen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #1a252f; display: flex; justify-content: center; align-items: center; z-index: 9999;
-        }
-        .login-card {
-            background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 350px; 
-            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .login-card h2 { color: var(--accent-color); margin-bottom: 20px; }
-        .login-card input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
-        .login-card button { width: 100%; padding: 12px; background: var(--accent-color); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-
-        /* প্যানেলগুলো প্রথমে লুকানো থাকবে */
-        #userPanel, #adminPanel { display: none; }
-
-        /* ইউজার প্যানেল স্টাইল */
-        header { background: var(--primary-color); color: white; padding: 40px; text-align: center; border-bottom: 5px solid var(--accent-color); }
-        .container { max-width: 900px; margin: 40px auto; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .btn { text-decoration: none; padding: 12px 20px; border-radius: 5px; color: white; font-weight: bold; display: inline-block; margin-top: 15px; }
-        
-        /* অ্যাডমিন প্যানেল স্টাইল (উন্নত সংস্করণ) */
-        .admin-theme { background-color: var(--admin-bg); color: white; min-height: 100vh; }
-        .admin-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        .admin-box { background: #1e293b; padding: 25px; border-radius: 10px; border: 1px solid #334155; }
-        
-        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .admin-box label { font-size: 12px; color: #94a3b8; display: block; margin-top: 10px; }
-        .admin-box input, .admin-box select { 
-            width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; 
-            border: 1px solid #334155; background: #0f172a; color: white; box-sizing: border-box;
-        }
-        .full-width { grid-column: span 2; }
-        
-        #statusBox { margin-top: 20px; padding: 15px; border-radius: 4px; display: none; text-align: center; font-weight: bold; }
-        .success { background: #065f46; color: #34d399; }
-        .error { background: #7f1d1d; color: #f87171; }
-
-        .history-table { width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 13px; color: #cbd5e1; }
-        .history-table th, .history-table td { border: 1px solid #334155; padding: 10px; text-align: left; }
-        .history-table th { background: #334155; color: white; }
-
-        .logout-btn { background: #64748b; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; }
-        
-        @media print {
-            body * { visibility: hidden; }
-            #statusBox, #statusBox * { visibility: visible; }
-            #statusBox { position: absolute; left: 0; top: 0; width: 100%; color: black !important; }
-        }
+        body { font-family: Arial, sans-serif; background: #f1f5f9; margin: 0; }
+        header { background: #2c3e50; color: white; padding: 40px; text-align: center; }
+        .container { max-width: 800px; margin: 20px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+        .card { background: white; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn { display: inline-block; padding: 12px 20px; background: #c0392b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<!-- লগইন গেটওয়ে -->
-<div id="loginScreen">
-    <div class="login-card">
-        <div style="font-size: 28px; font-weight: bold; color: var(--accent-color); margin-bottom: 5px;">AR TV</div>
-        <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Strategic & Investigation Unit</p>
-        <input type="password" id="passInput" placeholder="সিকিউরিটি কোড দিন">
-        <button onclick="handleLogin()">ACCESS SYSTEM</button>
+<header>
+    <h1>AR TV REPORTER PORTAL</h1>
+    <p>নিচে আপনার প্রয়োজনীয় বিভাগটি নির্বাচন করুন</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h3>প্রাথমিক আবেদন</h3>
+        <p>নতুন রিপোর্টার পদের জন্য এখানে আবেদন করুন।</p>
+        <a href="apply.html" class="btn">APPLY NOW</a>
+    </div>
+    <div class="card">
+        <h3>চূড়ান্ত যোগদান</h3>
+        <p>নির্বাচিত প্রার্থীদের জন্য চূড়ান্ত ডাটা ফরম।</p>
+        <a href="joining.html" class="btn" style="background: #27ae60;">JOINING NOW</a>
     </div>
 </div>
 
-<!-- ১. ইউজার প্যানেল -->
-<div id="userPanel">
-    <header>
-        <div style="font-size: 32px; font-weight: bold;">AR TV</div>
-        <h1>REPORTER PORTAL</h1>
-    </header>
-    <div class="container">
-        <div class="grid">
-            <div class="card">
-                <h3>প্রাথমিক আবেদন</h3>
-                <p>আন্ডারকাভার ক্রাইম রিপোর্টার পদের জন্য আবেদন ফরম পূরণ করুন।</p>
-                <a href="apply.html" class="btn" style="background: var(--accent-color);">APPLY NOW</a>
-            </div>
-            <div class="card">
-                <h3>চূড়ান্ত যোগদান</h3>
-                <p>নির্বাচিত প্রার্থীদের জন্য অফিশিয়াল ডাটা সাবমিশন ও জয়েনিং।</p>
-                <a href="joining.html" class="btn" style="background: var(--user-color);">JOIN NOW</a>
-            </div>
-        </div>
-        <center><button class="logout-btn" onclick="logout()">LOGOUT</button></center>
-    </div>
-</div>
-
-<!-- ২. অ্যাডমিন প্যানেল -->
-<div id="adminPanel" class="admin-theme">
-    <div class="admin-container">
-        <h2 style="color: #e11d48; text-align: center; margin-bottom: 5px;">ADMIN CONTROL PANEL</h2>
-        <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 25px;">প্রার্থী অনুমোদন ও রেকর্ড সিস্টেম</p>
-        
-        <div class="admin-box">
-            <form id="approvalForm" action="https://formspree.io/f/mykqbayr" method="POST">
-                <div class="admin-grid">
-                    <div class="form-group">
-                        <label>প্রার্থীর নাম</label>
-                        <input type="text" name="Approved_Name" id="admName" required placeholder="John Doe">
-                    </div>
-                    <div class="form-group">
-                        <label>কোড নেম</label>
-                        <input type="text" name="Code_Name" id="admCode" required placeholder="Agent X">
-                    </div>
-                    <div class="form-group">
-                        <label>মোবাইল নম্বর</label>
-                        <input type="tel" name="Mobile" id="admMobile" required placeholder="017XXXXXXXX">
-                    </div>
-                    <div class="form-group">
-                        <label>এনআইডি নম্বর</label>
-                        <input type="text" name="NID_Assigned" id="admNid" required placeholder="NID Number">
-                    </div>
-                    <div class="form-group">
-                        <label>অ্যাপ্রুভাল আইডি (Auto)</label>
-                        <input type="text" name="Approval_ID" id="admId" readonly style="color: #22c55e;">
-                    </div>
-                    <div class="form-group">
-                        <label>তারিখ ও সময়</label>
-                        <input type="text" name="Date_Time" id="admDate" readonly>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>অফিসিয়াল মন্তব্য</label>
-                        <input type="text" name="Admin_Remarks" value="Verified & Approved for Field Duty">
-                    </div>
-                </div>
-
-                <input type="hidden" name="_subject" id="admSubject" value="New Applicant Approved">
-                
-                <button type="submit" id="admSubmitBtn" style="background: #22c55e; color: white; padding: 12px; width: 100%; border: none; border-radius: 4px; font-weight: bold; margin-top: 20px; cursor: pointer;">CONFIRM & RECORD APPROVAL</button>
-            </form>
-        </div>
-
-        <div id="statusBox"></div>
-
-        <div class="history-section">
-            <table class="history-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>নাম</th>
-                        <th>কোড নেম</th>
-                        <th>অবস্থা</th>
-                    </tr>
-                </thead>
-                <tbody id="historyBody">
-                    <!-- History entries -->
-                </tbody>
-            </table>
-        </div>
-
-        <center><button class="logout-btn" onclick="logout()">EXIT ADMIN PANEL</button></center>
-    </div>
-</div>
-
-<script>
-    const USER_PASS = "artv2024";
-    const ADMIN_PASS = "admin@artv99";
-
-    // ১. লগইন লজিক
-    function handleLogin() {
-        const input = document.getElementById('passInput').value;
-        const loginScreen = document.getElementById('loginScreen');
-        const userPanel = document.getElementById('userPanel');
-        const adminPanel = document.getElementById('adminPanel');
-
-        if (input === ADMIN_PASS) {
-            loginScreen.style.display = 'none';
-            adminPanel.style.display = 'block';
-            sessionStorage.setItem("role", "admin");
-            initAdmin();
-        } 
-        else if (input === USER_PASS) {
-            loginScreen.style.display = 'none';
-            userPanel.style.display = 'block';
-            sessionStorage.setItem("role", "user");
-        } 
-        else {
-            alert("❌ ভুল কোড!");
-        }
-    }
-
-    // ২. অ্যাডমিন প্যানেল ইনিশিয়ালাইজেশন
-    function initAdmin() {
-        updateAdminMeta();
-        setInterval(updateAdminMeta, 1000);
-    }
-
-    function updateAdminMeta() {
-        const now = new Date();
-        const dateInput = document.getElementById('admDate');
-        const idInput = document.getElementById('admId');
-        
-        if(dateInput) dateInput.value = now.toLocaleString();
-        if(idInput && !idInput.value) {
-            idInput.value = 'ARTV-' + Math.floor(1000 + Math.random() * 9000);
-        }
-    }
-
-    // ৩. ফর্ম সাবমিশন (AJAX)
-    const adminForm = document.getElementById('approvalForm');
-    if(adminForm) {
-        adminForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('admSubmitBtn');
-            const statusBox = document.getElementById('statusBox');
-            
-            btn.disabled = true;
-            btn.innerText = 'Recording...';
-            document.getElementById('admSubject').value = "Approved: " + document.getElementById('admName').value;
-
-            const formData = new FormData(adminForm);
-
-            fetch(adminForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusBox.className = 'success';
-                    statusBox.innerHTML = `✅ ${document.getElementById('admName').value} অনুমোদিত হয়েছে। <br> <button onclick="window.print()" style="margin-top:10px; cursor:pointer;">স্লিপ প্রিন্ট করুন</button>`;
-                    statusBox.style.display = 'block';
-                    
-                    // হিস্টোরিতে যোগ করা
-                    addToHistory(document.getElementById('admId').value, document.getElementById('admName').value, document.getElementById('admCode').value);
-                    
-                    adminForm.reset();
-                    document.getElementById('admId').value = ''; 
-                    updateAdminMeta();
-                } else {
-                    throw new Error();
-                }
-            })
-            .catch(() => {
-                statusBox.className = 'error';
-                statusBox.innerHTML = '❌ এরর হয়েছে। আবার চেষ্টা করুন।';
-                statusBox.style.display = 'block';
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btn.innerText = 'CONFIRM & RECORD APPROVAL';
-            });
-        });
-    }
-
-    function addToHistory(id, name, code) {
-        const body = document.getElementById('historyBody');
-        const row = `<tr><td>${id}</td><td>${name}</td><td>${code}</td><td style="color:#22c55e">Approved</td></tr>`;
-        body.innerHTML = row + body.innerHTML;
-    }
-
-    // সেশন চেক ও লগআউট
-    window.onload = function() {
-        const role = sessionStorage.getItem("role");
-        if (role === "admin") {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'block';
-            initAdmin();
-        } else if (role === "user") {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('userPanel').style.display = 'block';
-        }
-    };
-
-    function logout() {
-        sessionStorage.clear();
-        location.reload();
-    }
-
-    document.getElementById('passInput').addEventListener("keyup", function(event) {
-        if (event.key === "Enter") { handleLogin(); }
-    });
-</script>
+<center><a href="login.html" style="color: #666;">লগআউট করুন</a></center>
 
 </body>
 </html>
