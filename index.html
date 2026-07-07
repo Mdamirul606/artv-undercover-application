@@ -1,1 +1,210 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR TV - Strategic & Investigation Unit</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #c0392b;
+            --joining-color: #27ae60;
+            --admin-color: #2980b9;
+            --bg-color: #f5f6fa;
+            --text-color: #1a252f;
+        }
 
+        body {
+            font-family: 'Segoe UI', 'SolaimanLipi', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        .logo-placeholder {
+            font-size: 48px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-text h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        /* Card Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .btn-apply { background-color: var(--accent-color); }
+        .btn-apply:hover { background-color: #a0281c; }
+
+        .btn-join { background-color: var(--joining-color); }
+        .btn-join:hover { background-color: #1e8449; }
+
+        .btn-admin { background-color: var(--admin-color); }
+        .btn-admin:hover { background-color: #1c638e; }
+
+        .confidential-badge {
+            background: #fff5f5;
+            color: #c0392b;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid #feb2b2;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #eee;
+            font-size: 13px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 22px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-placeholder">AR TV</div>
+    <h1>Strategic & Investigation Unit</h1>
+    <p>কৌশলগত ও অনুসন্ধান ইউনিট - অত্যন্ত গোপনীয়</p>
+</header>
+
+<div class="container">
+    <div class="welcome-text">
+        <span class="confidential-badge">STRICTLY CONFIDENTIAL</span>
+        <h2>অফিশিয়াল পোর্টাল ম্যানেজমেন্ট সিস্টেম</h2>
+        <p>আপনার প্রয়োজনীয় বিভাগটি নির্বাচন করুন।</p>
+    </div>
+
+    <div class="grid">
+        <!-- Card 1: Recruitment -->
+        <div class="card">
+            <div>
+                <h3>নতুন নিয়োগ আবেদন</h3>
+                <p>আন্ডারকাভার ক্রাইম রিপোর্টার হিসেবে কাজ করতে চাইলে প্রাথমিক প্রোফাইল জমা দিন।</p>
+            </div>
+            <!-- আবেদন পেজের ফাইল নাম এখানে দিবেন -->
+            <a href="apply.html" class="btn btn-apply">আবেদন করুন / APPLY NOW</a>
+        </div>
+
+        <!-- Card 2: Joining Portal -->
+        <div class="card" style="border-top: 5px solid var(--joining-color);">
+            <div>
+                <h3>চূড়ান্ত যোগদান পোর্টাল</h3>
+                <p>আপনি কি ইতিপূর্বে নির্বাচিত হয়েছেন? আপনার কোড নেম ও নথিপত্র দিয়ে জয়েনিং সম্পন্ন করুন।</p>
+            </div>
+            <!-- জয়েনিং পেজের ফাইল নাম এখানে দিবেন -->
+            <a href="joining.html" class="btn btn-join">যোগদান করুন / JOIN NOW</a>
+        </div>
+
+        <!-- Card 3: Admin Panel -->
+        <div class="card" style="border-top: 5px solid var(--admin-color);">
+            <div>
+                <h3>অ্যাডমিন প্যানেল</h3>
+                <p>কর্তৃপক্ষের ব্যবহারের জন্য। এখান থেকে আবেদন যাচাই ও অনুমোদন করা হয়।</p>
+            </div>
+            <!-- অ্যাডমিন পেজের ফাইল নাম এখানে দিবেন -->
+            <a href="admin.html" class="btn btn-admin">অ্যাডমিন লগইন / ADMIN</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024-2025 AR TV Strategic Unit. All Rights Reserved. <br>
+    Authorized Access Only.
+</footer>
+
+</body>
+</html>
