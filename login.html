@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR TV - Secure Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a252f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        .logo { font-size: 32px; font-weight: bold; color: #c0392b; margin-bottom: 20px; }
+        h2 { font-size: 18px; color: #333; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #a0281c; }
+        .error-msg { color: red; font-size: 13px; display: none; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="logo">AR TV</div>
+    <h2>Strategic Unit Login</h2>
+    <p style="font-size: 12px; color: #666;">এক্সেস কোড প্রদান করুন</p>
+    
+    <div id="error" class="error-msg">❌ ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</div>
+    
+    <input type="password" id="passwordField" placeholder="Enter Access Code">
+    <button onclick="checkLogin()">LOGIN / প্রবেশ করুন</button>
+</div>
+
+<script>
+    function checkLogin() {
+        const pass = document.getElementById('passwordField').value;
+        // আপনার পাসওয়ার্ড এখানে সেট করুন
+        const correctPass = "artv2024"; 
+
+        if (pass === correctPass) {
+            // লগইন সফল হলে সেশন স্টোরেজে মার্ক করে রাখবে
+            sessionStorage.setItem("isLoggedIn", "true");
+            window.location.href = "index.html"; // হোম পেজে নিয়ে যাবে
+        } else {
+            document.getElementById('error').style.display = 'block';
+        }
+    }
+
+    // এন্টার চাপলে লগইন হবে
+    document.getElementById('passwordField').addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            checkLogin();
+        }
+    });
+</script>
+
+</body>
+</html>
