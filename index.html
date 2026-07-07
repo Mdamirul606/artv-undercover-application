@@ -3,275 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR TV - Strategic & Investigation Unit</title>
+    <title>AR TV - Strategic Portal</title>
     <style>
         :root {
             --primary-color: #2c3e50;
             --accent-color: #c0392b;
-            --joining-color: #27ae60;
-            --admin-color: #2980b9;
+            --user-color: #27ae60;
+            --admin-bg: #0f172a;
             --bg-color: #f5f6fa;
-            --text-color: #1a252f;
         }
 
         body {
-            font-family: 'Segoe UI', 'SolaimanLipi', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* লগইন ওভারলে স্টাইল */
-        #loginOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #1a252f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+        /* লগইন স্ক্রিন */
+        #loginScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #1a252f; display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
-
         .login-card {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
+            background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 350px; 
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        .login-card h2 { color: var(--accent-color); margin-bottom: 20px; }
+        .login-card input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        .login-card button { width: 100%; padding: 12px; background: var(--accent-color); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
 
-        .login-card h2 { margin-bottom: 20px; color: var(--accent-color); }
-        .login-card input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        .login-card button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        /* প্যানেলগুলো প্রথমে লুকানো থাকবে */
+        #userPanel, #adminPanel { display: none; }
 
-        /* মূল কন্টেন্ট (প্রথমে লুকানো থাকবে) */
-        #mainContent {
-            display: none;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--accent-color);
-        }
-
-        .logo-placeholder {
-            font-size: 48px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-            text-transform: uppercase;
-        }
-
-        header p {
-            margin: 5px 0 0;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        /* Main Content Grid */
-        .container {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 20px;
-            flex: 1;
-        }
-
-        .welcome-text {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .welcome-text h2 {
-            color: var(--primary-color);
-            font-size: 24px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #eee;
-        }
-
-        .card:hover { transform: translateY(-10px); }
-
-        .btn {
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            color: white;
-            transition: 0.3s;
-        }
-
-        .btn-apply { background-color: var(--accent-color); }
-        .btn-join { background-color: var(--joining-color); }
-        .btn-admin { background-color: var(--admin-color); }
-
-        .confidential-badge {
-            background: #fff5f5;
-            color: #c0392b;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            border: 1px solid #feb2b2;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #eee;
-            font-size: 13px;
-            color: #777;
-        }
-
-        @media (max-width: 600px) {
-            header h1 { font-size: 22px; }
-            .grid { grid-template-columns: 1fr; }
-        }
+        /* ইউজার প্যানেল স্টাইল */
+        header { background: var(--primary-color); color: white; padding: 40px; text-align: center; border-bottom: 5px solid var(--accent-color); }
+        .container { max-width: 900px; margin: 40px auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .btn { text-decoration: none; padding: 12px 20px; border-radius: 5px; color: white; font-weight: bold; display: inline-block; margin-top: 15px; }
+        
+        /* অ্যাডমিন প্যানেল স্টাইল (সম্পূর্ণ আলাদা লুক) */
+        .admin-theme { background-color: var(--admin-bg); color: white; min-height: 100vh; }
+        .admin-container { max-width: 600px; margin: 0 auto; padding: 50px 20px; }
+        .admin-box { background: #1e293b; padding: 30px; border-radius: 10px; border: 1px solid #334155; }
+        .admin-box input, .admin-box select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 4px; border: 1px solid #334155; background: #0f172a; color: white; }
+        
+        .logout-btn { background: #64748b; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<!-- লগইন সেকশন -->
-<div id="loginOverlay">
+<!-- লগইন গেটওয়ে -->
+<div id="loginScreen">
     <div class="login-card">
-        <div style="font-size: 24px; font-weight: bold; color: #c0392b; margin-bottom: 10px;">AR TV</div>
-        <h2>Access Control</h2>
-        <p id="errorMsg" style="color: red; font-size: 12px; display: none;">❌ ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
-        <input type="password" id="passCode" placeholder="সিকিউরিটি কোড দিন">
-        <button onclick="validateLogin()">ENTER SYSTEM</button>
+        <div style="font-size: 28px; font-weight: bold; color: var(--accent-color); margin-bottom: 5px;">AR TV</div>
+        <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Strategic & Investigation Unit</p>
+        <input type="password" id="passInput" placeholder="সিকিউরিটি কোড দিন">
+        <button onclick="handleLogin()">ACCESS SYSTEM</button>
     </div>
 </div>
 
-<!-- আপনার মূল হোম পেজ কন্টেন্ট -->
-<div id="mainContent">
+<!-- ১. ইউজার প্যানেল (রিপোর্টারদের জন্য) -->
+<div id="userPanel">
     <header>
-        <div class="logo-placeholder">AR TV</div>
-        <h1>Strategic & Investigation Unit</h1>
-        <p>কৌশলগত ও অনুসন্ধান ইউনিট - অত্যন্ত গোপনীয়</p>
+        <div style="font-size: 32px; font-weight: bold;">AR TV</div>
+        <h1>REPORTER PORTAL</h1>
     </header>
-
     <div class="container">
-        <div class="welcome-text">
-            <span class="confidential-badge">STRICTLY CONFIDENTIAL</span>
-            <h2>অফিশিয়াল পোর্টাল ম্যানেজমেন্ট সিস্টেম</h2>
-            <p>আপনার প্রয়োজনীয় বিভাগটি নির্বাচন করুন।</p>
-        </div>
-
         <div class="grid">
             <div class="card">
-                <div>
-                    <h3>নতুন নিয়োগ আবেদন</h3>
-                    <p>আন্ডারকাভার ক্রাইম রিপোর্টার হিসেবে কাজ করতে চাইলে প্রাথমিক প্রোফাইল জমা দিন।</p>
-                </div>
-                <a href="apply.html" class="btn btn-apply">আবেদন করুন / APPLY NOW</a>
+                <h3>প্রাথমিক আবেদন</h3>
+                <p>আন্ডারকাভার ক্রাইম রিপোর্টার পদের জন্য আবেদন ফরম পূরণ করুন।</p>
+                <a href="apply.html" class="btn" style="background: var(--accent-color);">APPLY NOW</a>
             </div>
-
-            <div class="card" style="border-top: 5px solid var(--joining-color);">
-                <div>
-                    <h3>চূড়ান্ত যোগদান পোর্টাল</h3>
-                    <p>আপনি কি ইতিপূর্বে নির্বাচিত হয়েছেন? আপনার কোড নেম ও নথিপত্র দিয়ে জয়েনিং সম্পন্ন করুন।</p>
-                </div>
-                <a href="joining.html" class="btn btn-join">যোগদান করুন / JOIN NOW</a>
-            </div>
-
-            <div class="card" style="border-top: 5px solid var(--admin-color);">
-                <div>
-                    <h3>অ্যাডমিন প্যানেল</h3>
-                    <p>কর্তৃপক্ষের ব্যবহারের জন্য। এখান থেকে আবেদন যাচাই ও অনুমোদন করা হয়।</p>
-                </div>
-                <a href="admin.html" class="btn btn-admin">অ্যাডমিন লগইন / ADMIN</a>
+            <div class="card">
+                <h3>চূড়ান্ত যোগদান</h3>
+                <p>নির্বাচিত প্রার্থীদের জন্য অফিশিয়াল ডাটা সাবমিশন ও জয়েনিং।</p>
+                <a href="joining.html" class="btn" style="background: var(--user-color);">JOIN NOW</a>
             </div>
         </div>
+        <center><button class="logout-btn" onclick="logout()">LOGOUT</button></center>
     </div>
+</div>
 
-    <footer>
-        &copy; 2024-2025 AR TV Strategic Unit. All Rights Reserved. <br>
-        Authorized Access Only.
-    </footer>
+<!-- ২. অ্যাডমিন প্যানেল (সম্পূর্ণ আলাদা এবং শক্তিশালী) -->
+<div id="adminPanel" class="admin-theme">
+    <div class="admin-container">
+        <h1 style="color: #e11d48; text-align: center;">ADMIN CONTROL PANEL</h1>
+        <div class="admin-box">
+            <h3>প্রার্থী অনুমোদন (Approval)</h3>
+            <form action="https://formspree.io/f/mykqbayr" method="POST">
+                <label>প্রার্থীর নাম</label>
+                <input type="text" name="Approved_Name" required placeholder="নাম লিখুন">
+                
+                <label>মোবাইল নম্বর</label>
+                <input type="tel" name="Mobile" required placeholder="মোবাইল নম্বর">
+
+                <label>অ্যাসাইন করা কোড নেম / আইডি</label>
+                <input type="text" name="Assigned_ID" required placeholder="e.g. AGENT-007">
+                
+                <label>সিদ্ধান্ত</label>
+                <select name="Decision">
+                    <option value="Approved">Approve (অনুমোদিত)</option>
+                    <option value="Rejected">Reject (বাতিল)</option>
+                    <option value="Review">Keep on Review</option>
+                </select>
+
+                <button type="submit" style="background: #22c55e; color: white; padding: 12px; width: 100%; border: none; border-radius: 4px; font-weight: bold; margin-top: 10px; cursor: pointer;">SUBMIT APPROVAL</button>
+            </form>
+        </div>
+        <center><button class="logout-btn" onclick="logout()">EXIT ADMIN PANEL</button></center>
+    </div>
 </div>
 
 <script>
-    function validateLogin() {
-        const inputPass = document.getElementById('passCode').value;
-        const correctPass = "artv2024"; // আপনার পাসওয়ার্ড
+    // পাসওয়ার্ড কনফিগারেশন
+    const USER_PASS = "artv2024";
+    const ADMIN_PASS = "admin@artv99";
 
-        if (inputPass === correctPass) {
-            // লগইন সফল
-            document.getElementById('loginOverlay').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            sessionStorage.setItem("authorized", "true");
-        } else {
-            // ভুল পাসওয়ার্ড
-            document.getElementById('errorMsg').style.display = 'block';
+    function handleLogin() {
+        const input = document.getElementById('passInput').value;
+        const loginScreen = document.getElementById('loginScreen');
+        const userPanel = document.getElementById('userPanel');
+        const adminPanel = document.getElementById('adminPanel');
+
+        if (input === ADMIN_PASS) {
+            // অ্যাডমিন পাসওয়ার্ড দিলে
+            loginScreen.style.display = 'none';
+            adminPanel.style.display = 'block';
+            sessionStorage.setItem("role", "admin");
+        } 
+        else if (input === USER_PASS) {
+            // ইউজার পাসওয়ার্ড দিলে
+            loginScreen.style.display = 'none';
+            userPanel.style.display = 'block';
+            sessionStorage.setItem("role", "user");
+        } 
+        else {
+            alert("❌ ভুল কোড! সঠিক কোড প্রদান করুন।");
         }
     }
 
-    // এন্টার কি কাজ করার জন্য
-    document.getElementById('passCode').addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            validateLogin();
-        }
-    });
-
-    // পেজ রিফ্রেশ করলেও সেশন চেক করবে
+    // পেজ রিফ্রেশ করলে সেশন ধরে রাখা
     window.onload = function() {
-        if (sessionStorage.getItem("authorized") === "true") {
-            document.getElementById('loginOverlay').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
+        const role = sessionStorage.getItem("role");
+        if (role === "admin") {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+        } else if (role === "user") {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'block';
         }
     };
+
+    function logout() {
+        sessionStorage.clear();
+        location.reload();
+    }
+
+    // এন্টার বাটন সাপোর্ট
+    document.getElementById('passInput').addEventListener("keyup", function(event) {
+        if (event.key === "Enter") { handleLogin(); }
+    });
 </script>
 
 </body>
